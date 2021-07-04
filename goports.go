@@ -23,8 +23,8 @@ const (
 var (
 	host    = flag.String("host", "127.0.0.1", "Host or IP address to scan")
 	ports   = flag.String("ports", "1-65535", "Port range to be tested (Ex: 80,443,1-65535,1000-2000)")
-	top_20  = flag.Bool("top20", false, "Scanner top 20 most scanned ports.\nBy default they will be scanned only for TCP")
-	top_200 = flag.Bool("top200", false, "Scanner top 200 most scanned ports\nBy default they will be scanned only for TCP")
+	top_20  = flag.Bool("top20", false, "Scanner top 20 most scanned TCP ports")
+	top_200 = flag.Bool("top200", false, "Scanner top 200 most scanned TCP ports")
 	threads = flag.Int("threads", 900, "Number of threads to be used")
 	timeout = flag.Duration("timeout", 1*time.Second, "Connection timeout in seconds")
 
@@ -100,13 +100,15 @@ func parameters() string {
 
 	flag.Usage = func() {
 		fmt.Printf(Yellow("Usage of %s:\n\n"), os.Args[0])
-		fmt.Print(Magenta("EXAMPLES:\n"))
-		fmt.Print(Teal("  goports -host www.google.com -ports 21-23,80,443\n"))
-		fmt.Print(Teal("  goports -host www.google.com -tcp 80,443 -timeout 5 -threads 900\n"))
-		fmt.Print(Teal("  goports -host www.google.com -top20 -threads 900\n\n"))
+		fmt.Print(Magenta("Examples:\n\n"))
+		fmt.Printf("%-90s %-35s\n", Teal("go run goports"), Yellow("This command will scan all ports in localhost (127.0.0.1)"))
+		fmt.Printf("%-90s %-35s\n", Teal("go run goports -host 10.10.10.10 -ports 21-23,80,443"), Yellow("This command will scan specific ports over a specific host"))
+		fmt.Printf("%-90s %-35s\n", Teal("go run goports -host www.google.com -ports 80,443 -timeout 5 -threads 1000"), Yellow("This command will scan the specified ports over a specific host, setting a timeout of 5 seconds and using 1000 threads"))
+		fmt.Printf("%-90s %-35s\n", Teal("go run goports -host www.google.com -top20 -threads 1000"), Yellow("This command will scan the top 20 tcp ports over a specific host using 1000 threads"))
+		fmt.Printf("%-90s %-35s\n\n", Teal("go run goports -host www.google.com -top200 -threads 1000"), Yellow("This command will scan the top 200 tcp ports over a specific host using 1000 threads"))
 		fmt.Print(Yellow("* Only open ports will be displayed\n\n"))
 		fmt.Print(Yellow("* Remember to use just one of the following options : top20, top200 or nothing\n\n"))
-		fmt.Print(Magenta("OPTIONS:\n"))
+		fmt.Print(Magenta("Options:\n\n"))
 		flag.PrintDefaults()
 	}
 
