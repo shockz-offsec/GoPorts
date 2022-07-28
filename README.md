@@ -65,7 +65,3 @@ This command will scan the top 200 tcp ports on the designated host using 1000 t
 ### License
 
 *Apache-2.0 License*
-
-### Author
-
-Jorge Manuel Lozano Gómez
