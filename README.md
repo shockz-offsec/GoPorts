@@ -15,7 +15,7 @@ Install Golang in Windows  => [Download Golang](https://golang.org/dl/)
 
 Clone the repository into your machine
 
-    git clone https://github.com/jmlgomez73/GoPorts
+    git clone https://github.com/shockz-offsec/GoPorts
 
 Move to the GoPorts directory
 
